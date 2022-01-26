@@ -3,16 +3,18 @@ package internalhttp
 import (
 	"context"
 	"fmt"
+	"github.com/LebedevNd/BannerRotation/internal/app"
 	"net/http"
 )
 
 type Server struct {
 	server *http.Server
+	app    app.App
 }
 
 type MyHandler struct{}
 
-func NewServer(host string, port int) *Server {
+func NewServer(app app.App, host string, port int) *Server {
 	handler := &MyHandler{}
 
 	mux := http.NewServeMux()
@@ -28,6 +30,7 @@ func NewServer(host string, port int) *Server {
 
 	return &Server{
 		server,
+		app,
 	}
 }
 
